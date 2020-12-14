@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8"/>
+    <title>pdfDownload</title>
+    <link href="asserts/plugin/bootstrap/bootstrap.css" rel="stylesheet">
+
+    <script type="text/javascript" src="asserts/plugin/jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="asserts/plugin/bootstrap/bootstrap.js"></script>
+</head>
+<style>
+    .content {
+        width: 700px;
+        height: 600px;
+        /*background-color: orange;*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<body>
+<div class="content">
+    <span class="input-group-addon" id="basic-addon1" style="margin-right: 10px">输入Id</span>
+    <input type="text" class="pd form-control" style="width: 200px;height: 20px;margin-right: 20px">
+    <button onclick="pdClick()" type="submit" class="btn btn-success" data-dismiss="alert" aria-label="Close">
+        点击下载
+    </button>
+</div>
+</body>
+<script>
+    $(function () {
+        pdClick();
+    });
+
+    function pdClick() {
+        let id = ($(".pd").val());
+        if (id == '') {
+            alert("请输入ID")
+        } else {
+            pd(id)
+        }
+    }
+
+    function pd(id) {
+        $.ajax({
+            url: "/pd/" + id,
+            type: "post",
+            success: function (result) {
+                alert("下载成功")
+            },
+            error: function () {
+                alert("下载失败")
+            }
+        })
+    }
+</script>
+</html>
